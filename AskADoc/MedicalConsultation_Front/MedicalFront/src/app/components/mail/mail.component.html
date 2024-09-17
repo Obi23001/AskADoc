@@ -1,0 +1,26 @@
+<div class="bg-gray-50 font-[sans-serif]">
+  <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+    <div class="max-w-md w-full">
+      <div class="p-8 rounded-2xl bg-white shadow">
+        <h2 class="text-gray-800 text-center text-2xl font-bold">Activate Your Account</h2>
+        <form [formGroup]="activationForm" (ngSubmit)="onSubmit()" class="mt-8 space-y-4">
+          <div>
+            <label for="activationCode" class="text-gray-800 text-sm mb-2 block">Activation Code</label>
+            <div class="relative flex items-center">
+              <input formControlName="activationCode" type="text" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter 6-digit code">
+            </div>
+          </div>
+          <div class="!mt-8">
+            <button type="submit" [disabled]="activationForm.invalid" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+              Activate Account
+            </button>
+          </div>
+        </form>
+        <div *ngIf="message" class="mt-4 text-center p-2 rounded" [ngClass]="{'text-green-600 bg-green-100': isActivated, 'text-red-600 bg-red-100': !isActivated}">
+          {{ message }}
+          <p *ngIf="isActivated">You will be redirected to the login page shortly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

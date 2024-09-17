@@ -1,0 +1,78 @@
+<!-- Verification Message -->
+<div *ngIf="!isLoading && !user?.verified && isLoggedIn" class="fixed-verification-message">
+  Your account is not verified. Please
+  <a (click)="redirectToDashboard()" class="text-white underline cursor-pointer">
+    Verify your account</a> to start working.
+</div>
+
+<div class="fixed-nav" style="background-color: rgba(255, 254, 254, 0.8);">
+  <nav class="container mx-auto flex items-center justify-between h-full px-6 mt-3" aria-label="Global">
+    <div class="flex items-center">
+      <a href="#" class="flex items-center">
+        <span class="sr-only">AskADoc</span>
+        <img class="logo-image" src="assets/askadoc-high-resolution-logo-transparent (1).png" alt="AskADoc Logo" />
+      </a>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-8">
+      <a routerLink="/" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Home</a>
+      <div *ngIf="isLoggedIn" class="relative">
+        <button (click)="toggleMoreDropdown()" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">
+          More
+        </button>
+        <div class="dropdown-menu" [ngClass]="{'hidden': !isMoreDropdownOpen}">
+          <a routerLink="/about" class="block px-4 py-2 hover:bg-gray-100">About</a>
+          <a routerLink="/contact" class="block px-4 py-2 hover:bg-gray-100">Contact</a>
+        </div>
+      </div>
+      <a routerLink="/about" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">About</a>
+      <a routerLink="/contact" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Contact</a>
+      <a *ngIf="isLoggedIn" routerLink="/docs" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Doctors</a>
+      <a routerLink="/articles" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Articles</a>
+      <a *ngIf="isLoggedIn" routerLink="/questions" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">
+        Consultations
+      </a>
+      <a *ngIf="isLoggedIn" routerLink="/organizations" routerLinkActive="active" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Organizations</a>
+    </div>
+    <div class="flex items-center">
+      <ng-container *ngIf="isLoggedIn; else loginRegisterLinks">
+        <div id="dropdownContainer" class="dropdown-container relative">
+          <button id="dropdownAvatarNameButton" (click)="toggleDropdown()" class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 me-2 rounded-full" [src]="profileImageUrl" alt="user photo">
+            {{ user?.fullName || 'User' }}
+            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div id="dropdownAvatarName" class="dropdown-menu z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2" [ngClass]="{'hidden': !isDropdownOpen}">
+            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+              <div class="font-medium">{{ user?.fullName || 'User' }}</div>
+              <div class="truncate">{{ userEmail }}</div>
+              <div class="font-medium capitalize">{{ getUserRole() }}</div>
+            </div>
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownAvatarNameButton">
+              <li>
+                <a [routerLink]="getDashboardLink()" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+              </li>
+              <li>
+                <a href="/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+              </li>
+              <li>
+                <a href="/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+              </li>
+            </ul>
+            <div class="py-2">
+              <button (click)="logout()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loginRegisterLinks>
+        <a routerLink="/register" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 mr-4">Register</a>
+        <a routerLink="/login" class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">Login</a>
+      </ng-template>
+    </div>
+  </nav>
+</div>

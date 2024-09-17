@@ -1,0 +1,402 @@
+<div
+    class="bg-gray-50 min-h-screen flex flex-col items-center justify-center py-6 px-4 sm:px-6 lg:px-8"
+>
+    <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+            Register
+        </h2>
+
+        <!-- Registration Type Selector -->
+        <div class="mb-6 flex justify-center space-x-4">
+            <button (click)="setActiveForm('doctor')" [class.bg-blue-600]="activeForm === 'doctor'" [class.text-white]="activeForm === 'doctor'" class="px-4 py-2 rounded-md">Doctor</button>
+            <button (click)="setActiveForm('patient')" [class.bg-blue-600]="activeForm === 'patient'" [class.text-white]="activeForm === 'patient'" class="px-4 py-2 rounded-md">Patient</button>
+            <button (click)="setActiveForm('organization')" [class.bg-blue-600]="activeForm === 'organization'" [class.text-white]="activeForm === 'organization'" class="px-4 py-2 rounded-md">Organization</button>
+        </div>
+
+        <!-- Doctor Registration Form -->
+        <form *ngIf="activeForm === 'doctor'" [formGroup]="doctorForm" (ngSubmit)="registerDoctor()" class="space-y-4">
+            <div>
+                <label
+                    for="doctorFirstName"
+                    class="block text-sm font-medium text-gray-700"
+                    >First Name</label
+                >
+                <input
+                    id="doctorFirstName"
+                    type="text"
+                    formControlName="firstName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('firstName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('firstName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorLastName"
+                    class="block text-sm font-medium text-gray-700"
+                    >Last Name</label
+                >
+                <input
+                    id="doctorLastName"
+                    type="text"
+                    formControlName="lastName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('lastName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('lastName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorEmail"
+                    class="block text-sm font-medium text-gray-700"
+                    >Email</label
+                >
+                <input
+                    id="doctorEmail"
+                    type="email"
+                    formControlName="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('email')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('email')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorPassword"
+                    class="block text-sm font-medium text-gray-700"
+                    >Password</label
+                >
+                <input
+                    id="doctorPassword"
+                    type="password"
+                    formControlName="password"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('password')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('password')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorDateOfBirth"
+                    class="block text-sm font-medium text-gray-700"
+                    >Date of Birth</label
+                >
+                <input
+                    id="doctorDateOfBirth"
+                    type="date"
+                    formControlName="dateOfBirth"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('dateOfBirth')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('dateOfBirth')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorCity"
+                    class="block text-sm font-medium text-gray-700"
+                    >City</label
+                >
+                <input
+                    id="doctorCity"
+                    type="text"
+                    formControlName="city"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="doctorForm.get('city')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('city')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="doctorGender"
+                    class="block text-sm font-medium text-gray-700"
+                    >Gender</label
+                >
+                <select
+                    id="doctorGender"
+                    formControlName="gender"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                    <option value="">Select Gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+                <p *ngIf="doctorForm.get('gender')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ doctorForm.get('gender')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <button
+                type="submit"
+                [disabled]="doctorForm.invalid"
+                class="w-full mt-6 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+                Register as Doctor
+            </button>
+        </form>
+
+        <!-- Patient Registration Form -->
+        <form *ngIf="activeForm === 'patient'" [formGroup]="patientForm" (ngSubmit)="registerPatient()" class="space-y-4">
+            <div>
+                <label
+                    for="patientFirstName"
+                    class="block text-sm font-medium text-gray-700"
+                    >First Name</label
+                >
+                <input
+                    id="patientFirstName"
+                    type="text"
+                    formControlName="firstName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('firstName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('firstName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientLastName"
+                    class="block text-sm font-medium text-gray-700"
+                    >Last Name</label
+                >
+                <input
+                    id="patientLastName"
+                    type="text"
+                    formControlName="lastName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('lastName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('lastName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientEmail"
+                    class="block text-sm font-medium text-gray-700"
+                    >Email</label
+                >
+                <input
+                    id="patientEmail"
+                    type="email"
+                    formControlName="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('email')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('email')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientPassword"
+                    class="block text-sm font-medium text-gray-700"
+                    >Password</label
+                >
+                <input
+                    id="patientPassword"
+                    type="password"
+                    formControlName="password"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('password')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('password')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientDateOfBirth"
+                    class="block text-sm font-medium text-gray-700"
+                    >Date of Birth</label
+                >
+                <input
+                    id="patientDateOfBirth"
+                    type="date"
+                    formControlName="dateOfBirth"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('dateOfBirth')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('dateOfBirth')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientCity"
+                    class="block text-sm font-medium text-gray-700"
+                    >City</label
+                >
+                <input
+                    id="patientCity"
+                    type="text"
+                    formControlName="city"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="patientForm.get('city')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('city')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="patientGender"
+                    class="block text-sm font-medium text-gray-700"
+                    >Gender</label
+                >
+                <select
+                    id="patientGender"
+                    formControlName="gender"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                    <option value="">Select Gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+                <p *ngIf="patientForm.get('gender')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ patientForm.get('gender')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <button
+                type="submit"
+                [disabled]="patientForm.invalid"
+                class="w-full mt-6 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+                Register as Patient
+            </button>
+        </form>
+
+        <!-- Organization Registration Form -->
+        <form *ngIf="activeForm === 'organization'" [formGroup]="organizationForm" (ngSubmit)="registerOrganization()" class="space-y-4">
+            <div>
+                <label
+                    for="organizationFirstName"
+                    class="block text-sm font-medium text-gray-700"
+                    >First Name</label
+                >
+                <input
+                    id="organizationFirstName"
+                    type="text"
+                    formControlName="firstName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('firstName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('firstName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationLastName"
+                    class="block text-sm font-medium text-gray-700"
+                    >Last Name</label
+                >
+                <input
+                    id="organizationLastName"
+                    type="text"
+                    formControlName="lastName"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('lastName')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('lastName')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationEmail"
+                    class="block text-sm font-medium text-gray-700"
+                    >Email</label
+                >
+                <input
+                    id="organizationEmail"
+                    type="email"
+                    formControlName="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('email')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('email')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationPassword"
+                    class="block text-sm font-medium text-gray-700"
+                    >Password</label
+                >
+                <input
+                    id="organizationPassword"
+                    type="password"
+                    formControlName="password"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('password')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('password')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationDateOfBirth"
+                    class="block text-sm font-medium text-gray-700"
+                    >Date of Birth</label
+                >
+                <input
+                    id="organizationDateOfBirth"
+                    type="date"
+                    formControlName="dateOfBirth"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('dateOfBirth')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('dateOfBirth')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationCity"
+                    class="block text-sm font-medium text-gray-700"
+                    >City</label
+                >
+                <input
+                    id="organizationCity"
+                    type="text"
+                    formControlName="city"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <p *ngIf="organizationForm.get('city')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('city')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <div>
+                <label
+                    for="organizationGender"
+                    class="block text-sm font-medium text-gray-700"
+                    >Gender</label
+                >
+                <select
+                id="organizationGender"
+                formControlName="gender"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                 >
+                <option value="">Select Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                </select>
+                <p *ngIf="organizationForm.get('gender')?.errors?.['serverError']" class="mt-1 text-sm text-red-600">
+                    {{ organizationForm.get('gender')?.errors?.['serverError'] }}
+                </p>
+            </div>
+            <button
+                type="submit"
+                [disabled]="organizationForm.invalid"
+                class="w-full mt-6 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+                Register as Organization
+            </button>
+        </form>
+
+        <div *ngIf="registrationError.general" class="mt-4 text-red-600">
+            <p>{{ registrationError.general }}</p>
+        </div>
+
+        <div *ngIf="registrationSuccess" class="mt-4 text-green-600">
+            {{ registrationSuccess }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 10;
+}
+
+.dropdown-menu:not(.hidden) {
+  display: block;
+}
+
+.dropdown-container.show .dropdown-menu {
+  display: block;
+}
+
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+}
+
+.hero-background {
+  background: linear-gradient(to right, #e0e7ff, #f0f9ff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.flex.items-center {
+  height: 50%; /* Ensure the logo container takes full height */
+  margin: 0; /* Remove any margin */
+}
+
+.logo-image {
+  max-height: 20px; /* Reduced from 60px to 40px */
+  width: auto;
+  object-fit: contain;
+}
+
+.hidden.lg\:flex {
+  margin-top: 0; /* Ensure no margin is pushing items down */
+}
+
+.fixed-verification-message {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 0.25rem;
+  width: auto; /* Adjust width as needed */
+  max-width: 90%; /* Ensure it doesn't overflow on smaller screens */
+}
+

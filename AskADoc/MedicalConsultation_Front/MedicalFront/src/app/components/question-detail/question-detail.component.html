@@ -1,0 +1,13 @@
+<div *ngIf="question">
+  <h2>{{ question.title }}</h2>
+  <p>Category: {{ question.category }}</p>
+  <p>{{ question.description }}</p>
+  <h3>Answers:</h3>
+  <ul>
+    <li *ngFor="let answer of question.answers">
+      <p>{{ answer.content }}</p>
+      <p>By: {{ answer.doctor.name }}</p>
+    </li>
+  </ul>
+  <app-answer-question [questionId]="question.id"></app-answer-question>
+</div>

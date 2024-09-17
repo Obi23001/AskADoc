@@ -1,0 +1,75 @@
+<div class="container mx-auto px-4 py-8">
+  <button *ngIf="isPatient" (click)="openAskQuestionPopup()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300 mb-4">
+    Ask Question
+  </button>
+
+  <div *ngIf="showPopup" class="popup-overlay">
+    <div class="popup-content">
+      <h2 class="text-2xl font-bold mb-4">Ask a Question</h2>
+      <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <select formControlName="category" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Select a category</option>
+            <option *ngFor="let category of medicalCategories" [value]="category">{{ medicalCategoriesDisplay[category] }}</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <input type="text" formControlName="title" placeholder="Title" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div class="mb-4">
+          <textarea formControlName="description" placeholder="Description" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+        </div>
+        <div class="mb-4">
+          <input type="text" formControlName="keyword" placeholder="Keyword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Submit Question</button>
+        <button type="button" (click)="closeAskQuestionPopup()" class="mt-2 bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngFor="let question of questions" class="question-bubble mb-4">
+    <h3 class="text-xl font-semibold mb-2">
+      <i class="fas fa-question-circle mr-2"></i>{{ question.title }}
+    </h3>
+    <p class="text-gray-600 mb-2 patient-name">
+      <i class="fas fa-user mr-1"></i>Asked by: <strong>{{ question.patient?.fullName }}</strong>
+    </p>
+    <p class="text-gray-700">{{ question.description }}</p>
+    <p class="text-gray-600 category">
+      <i class="fas fa-tags mr-1"></i>Category: <span class="category-display">{{ question.categoryDisplay }}</span>
+    </p>
+    <div class="ml-4 flex-shrink-0">
+      <button *ngIf="isDoctor" 
+              (click)="toggleAnswerForm(question)" 
+              class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+        Answer
+      </button>
+      <button *ngIf="question.answers && question.answers.length > 0" 
+              (click)="toggleAnswerView(question)" 
+              class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300">
+        {{ question.showAnswer ? 'Hide Answer' : 'View Answer' }}
+      </button>
+    </div>
+    <div *ngIf="question.showAnswer" class="mt-4 answers-container">
+      <h4 class="font-semibold mb-2">
+        <i class="fas fa-comments mr-1"></i>Answers:
+      </h4>
+      <ul>
+        <li *ngFor="let answer of question.answers" class="answer-item">
+          <p>{{ answer.content }}</p>
+          <p class="text-gray-500">
+            <i class="fas fa-user-md doctor-icon mr-1"></i> <!-- Custom class for color -->
+            Answered by: Doctor {{ answer.doctor?.fullName || 'Anonymous' }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="question.showAnswerForm" class="mt-4">
+      <form [formGroup]="answerForm" (ngSubmit)="onSubmitAnswer(question.id)">
+        <textarea formControlName="content" placeholder="Write your answer here..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300 mt-2">Submit Answer</button>
+      </form>
+    </div>
+  </div>
+</div>

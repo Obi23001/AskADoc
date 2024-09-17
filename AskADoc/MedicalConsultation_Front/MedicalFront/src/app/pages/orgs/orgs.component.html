@@ -1,0 +1,23 @@
+<div class="container mx-auto px-4 py-8 mt-24">
+  <app-search 
+    [categories]="searchCategories" 
+    [placeholder]="'Search for organizations'"
+    (searchEvent)="onSearch($event)" 
+    (filterEvent)="onFilter($event)"
+  ></app-search>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-orgcard
+      *ngFor="let organization of displayedOrganizations"
+      [image]="organization['profileImageUrl']"
+      [name]="organization.organizationName"
+      [type]="organization.typeOfInstitution"
+      [description]="organization.description"
+      [facilityCity]="organization.facilityCity"
+    ></app-orgcard>
+  </div>
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+</div>

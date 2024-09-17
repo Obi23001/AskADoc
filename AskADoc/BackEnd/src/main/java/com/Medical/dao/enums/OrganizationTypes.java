@@ -1,0 +1,14 @@
+package com.Medical.dao.enums;
+
+public enum OrganizationTypes {
+    HOSPITAL,
+    CLINIC,
+    LABORATORY,
+    PHARMACY,
+    REHABILITATION_CENTER,
+    NURSING_HOME,
+    MEDICAL_RESEARCH_INSTITUTE,
+    AMBULATORY_CARE_CENTER,
+    DIAGNOSTIC_IMAGING_CENTER,
+    MENTAL_HEALTH_FACILITY
+}

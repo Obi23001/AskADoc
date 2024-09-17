@@ -1,0 +1,99 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: #4a5568;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #3182ce;
+  color: white;
+}
+
+.sidebar {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 64px; /* Adjust this value to match your navbar height */
+  height: calc(100vh - 64px); /* Adjust this value to match your navbar height */
+  overflow-y: auto;
+}
+
+.ml-64 {
+  margin-left: 4rem;
+}
+
+.mt-16 {
+  margin-top: 4rem; /* Adjust this value to match your navbar height */
+}
+
+.mb-16 {
+  margin-bottom: 0rem; /* Adjust this value to provide space for the footer */
+}
+
+.footer-space {
+  height: 0.3rem; /* Adjust this value to match the footer height */
+}
+
+/* Styles for Settings Section */
+.settings-section {
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 0.5rem; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 2rem; /* Padding for inner spacing */
+  margin-bottom: 2rem; /* Space between sections */
+}
+
+/* Styles for Form Elements */
+.settings-section h3 {
+  font-size: 1.5rem; /* Larger font for section titles */
+  color: #2d3748; /* Darker text color */
+  margin-bottom: 1rem; /* Space below the title */
+}
+
+.settings-section label {
+  font-weight: bold; /* Bold labels */
+  margin-bottom: 0.5rem; /* Space below labels */
+  display: block; /* Block display for labels */
+}
+
+.settings-section input[type="password"],
+.settings-section input[type="file"] {
+  width: 100%; /* Full width inputs */
+  padding: 0.5rem; /* Padding for inputs */
+  border: 1px solid #cbd5e0; /* Light gray border */
+  border-radius: 0.25rem; /* Rounded corners */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.settings-section input[type="password"]:focus,
+.settings-section input[type="file"]:focus {
+  border-color: #3182ce; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Styles for Buttons */
+.settings-section button {
+  background-color: #3182ce; /* Primary button color */
+  color: white; /* White text */
+  padding: 0.5rem 1rem; /* Padding for buttons */
+  border: none; /* Remove border */
+  border-radius: 0.25rem; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.settings-section button:hover {
+  background-color: #2b6cb0; /* Darker shade on hover */
+}
+
+/* Icon styles */
+.icon {
+  margin-right: 0.5rem; /* Space between icon and text */
+  vertical-align: middle; /* Align icon with text */
+}

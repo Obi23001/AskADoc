@@ -1,0 +1,23 @@
+<div class="container mx-auto px-4 py-8 mt-24">
+  <app-search 
+    [categories]="searchCategories" 
+    [placeholder]="'Search for doctors or specialties'"
+    (searchEvent)="onSearch($event)" 
+    (filterEvent)="onFilter($event)"
+  ></app-search>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-docard
+      *ngFor="let doctor of displayedDoctors"
+      [doctor]="doctor"
+      [image]="doctor['profileImageUrl']"
+      [name]="doctor.firstName + ' ' + doctor.lastName"
+      [specialty]="doctor.speciality"
+      [price]="(doctor.consultationFee | currency) ?? ''"
+    ></app-docard>
+  </div>
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+</div>

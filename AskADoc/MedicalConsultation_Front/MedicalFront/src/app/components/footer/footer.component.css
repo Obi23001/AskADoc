@@ -1,0 +1,7 @@
+.footer {
+  height: 4rem; /* Adjust this value to match the footer height */
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}

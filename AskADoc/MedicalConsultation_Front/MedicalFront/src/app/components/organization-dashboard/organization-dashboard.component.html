@@ -1,0 +1,85 @@
+<div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="flex flex-grow">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-md sidebar">
+      <div class="p-6">
+        <h1 class="text-2xl font-bold text-gray-800">Organization Dashboard</h1>
+      </div>
+      <nav class="mt-6">
+        <a (click)="changeSection('dashboard')" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-500 hover:text-white cursor-pointer" [ngClass]="{'bg-blue-500 text-white': activeSection === 'dashboard'}">Dashboard</a>
+        <a (click)="changeSection('profile')" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-500 hover:text-white cursor-pointer" [ngClass]="{'bg-blue-500 text-white': activeSection === 'profile'}">Profile</a>
+        <a (click)="changeSection('settings')" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-500 hover:text-white cursor-pointer" [ngClass]="{'bg-blue-500 text-white': activeSection === 'settings'}">Settings</a>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-10 mt-16 mb-16 overflow-y-auto">
+      <div class="max-w-3xl mx-auto">
+        <!-- Settings Section -->
+        <div *ngIf="activeSection === 'settings'" class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg shadow-lg">
+          <h2 class="text-3xl font-semibold mb-6 text-indigo-800">Settings</h2>
+
+          <!-- Profile Image Section -->
+          <div class="settings-section">
+            <h3 class="text-2xl font-semibold mb-4"><i class="fas fa-user-circle icon"></i>Profile Image</h3>
+            <div class="flex items-center">
+              <img *ngIf="organizationProfile?.['profileImage']" [src]="profileImageUrl" alt="Profile Image" class="w-32 h-32 rounded-full mr-4">
+              <input type="file" (change)="onFileChange($event)" accept="image/*" class="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out">
+            </div>
+            <button (click)="uploadImage()" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              Upload Image
+            </button>
+          </div>
+
+          <!-- Change Password Section -->
+          <div class="settings-section">
+            <h3 class="text-2xl font-semibold mb-4"><i class="fas fa-lock icon"></i>Change Password</h3>
+            <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
+              <div>
+                <label for="oldPassword">Old Password</label>
+                <input id="oldPassword" type="password" formControlName="oldPassword" required />
+                <div *ngIf="changePasswordForm.get('oldPassword')?.invalid && 
+                             (changePasswordForm.get('oldPassword')?.touched || 
+                              changePasswordForm.get('oldPassword')?.dirty)">
+                  <small *ngIf="changePasswordForm.get('oldPassword')?.errors?.['required']">
+                    Old Password is required.
+                  </small>
+                </div>
+              </div>
+              
+              <div>
+                <label for="newPassword">New Password</label>
+                <input id="newPassword" type="password" formControlName="newPassword" required />
+                <div *ngIf="changePasswordForm.get('newPassword')?.invalid && 
+                             (changePasswordForm.get('newPassword')?.touched || 
+                              changePasswordForm.get('newPassword')?.dirty)">
+                  <small *ngIf="changePasswordForm.get('newPassword')?.errors?.['required']">
+                    New Password is required.
+                  </small>
+                </div>
+              </div>
+              
+              <div>
+                <label for="confirmPassword">Confirm New Password</label>
+                <input id="confirmPassword" type="password" formControlName="confirmPassword" required />
+                <div *ngIf="changePasswordForm.get('confirmPassword')?.invalid && 
+                             (changePasswordForm.get('confirmPassword')?.touched || 
+                              changePasswordForm.get('confirmPassword')?.dirty)">
+                  <small *ngIf="changePasswordForm.get('confirmPassword')?.errors?.['required']">
+                    Confirm Password is required.
+                  </small>
+                </div>
+              </div>
+              
+              <button type="submit" [disabled]="changePasswordForm.invalid">Change Password</button>
+            </form>
+            <div *ngIf="changePasswordError" class="mt-4 text-red-600 text-center p-2 bg-red-100 rounded">
+              {{ changePasswordError }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-space"></div>
+</div>

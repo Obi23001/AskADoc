@@ -1,0 +1,18 @@
+<div class="flex items-center justify-between mb-4">
+  <div class="flex-1 mr-4">
+    <input
+      type="text"
+      [placeholder]="placeholder"
+      class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      (input)="onSearch($event)"
+    >
+  </div>
+  <select
+    (change)="onFilter($event)"
+    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option *ngFor="let category of categories" [value]="category.key">
+      {{ category.value }}
+    </option>
+  </select>
+</div>
