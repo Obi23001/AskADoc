@@ -6,7 +6,7 @@ Backend : Spring Boot
 Base de données : MySQL (phpMyAdmin Port : 3306)
 
 _Faut installé les dependences avant de lancé le projet :
-> cd MedicalConsultationFront/MedicalFront 
-> npm install
-> ng serve
+cd MedicalConsultationFront/MedicalFront
+npm install
+ng serve
 
