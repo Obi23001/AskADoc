@@ -82,6 +82,18 @@ Le frontend sera disponible à `http://localhost:4200`.
     npm install -g maildev
     ```
 
+    ### Si l'installation échoue, essayez les solutions suivantes :
+    
+    - **Utilisez `sudo` pour les permissions** :
+      ```bash
+      sudo npm install -g maildev
+      ```
+
+    - **Utilisez `npx` sans installation globale** :
+      ```bash
+      npx maildev
+      ```
+
 2. Démarrez Maildev en exécutant la commande suivante :
 
     ```bash
